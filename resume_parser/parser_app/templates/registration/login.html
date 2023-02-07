@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}"/>
+<title>{% block title %}</title>
+<h2>Please enter your credientials!</h2>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+     <form method="post" class="from-group">
+      <h2>Login Here</h2>
+	{% csrf_token %}
+	{{form|crispy}}
+	<p>Don't have an account? Create one <a href="/register">here</a></p>
+	<button type="submit" class="btn btn-success">Login</button>	
+    </form>
+{% endblock %}
+
+<footer>
+    <p>&copy; 2023 Resume Screening Website</p>
+    <p class="contact-info">Contact Info: 9861661645</p>
+    <p class="contact-info">E-mail: passresume@gmail.com </p>
+  </footer>
+  
+  </body>
+</html>

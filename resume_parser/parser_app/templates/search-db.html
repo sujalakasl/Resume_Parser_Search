@@ -1,0 +1,101 @@
+<!doctype html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}"/>
+{% load active %}
+{% load crispy_forms_tags %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title style="font-black">HIREABILITY</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logomarkv2.ico' %}">
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body style="font-family: 'Poppins', sans-serif;">
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+      {% include 'messages.html' %}
+    
+    <header>
+      <h2><link rel="stylesheet" type="text/css" href="homepgcan.css"></h2>
+    </header>
+    <div>
+      
+  {% load static %}
+ <link rel="stylesheet" type="text/css" href="{% static 'css/upload2.css' %}"/>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form class="d-flex" method=POST action="{% url 'search-db' %}">
+              {%csrf_token%}
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+              <button class="btn btn-outline-secondary col-md-1 col-lg-1" type="submit">Go</button>
+            </form>
+        </div>
+      </div>
+      {% block content %}
+      <center>
+        {% if searched %}
+          <h2> You searched For {{ searched }}</h2>
+            <br/>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <table bordercolor= "yellow" border="5" bgcolor="black" cellspacing="2" cellpadding="6" class="table table-bordered table-striped table-responsive">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Resume File</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Mobile Number</th>
+                      <th>Education</th>
+                      <th>Designation</th>
+                      <th>Total Experience in years</th>
+                      <th>Skills</th>
+                      <th>Experience</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for Resume in skill %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td><a href="{{resume.resume.url}}" target="_blank">{{resume.resume.url|truncatechars:20}}</a></td>
+                      <td>{{Resume.name}}</td>
+                      <td>{{Resume.email}}</td>
+                      <td>{{Resume.mobile_number}}</td>
+                      <td>{{Resume.education}}</td>
+                      <td>{{Resume.designation}}</td>
+                      <td>{{Resume.total_experience}}</td>
+                      <td>{{Resume.skills}}</td>
+                      <td>{{Resume.experience}}</td>
+                    </tr>
+                   {% endfor %}  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        {% else %}
+          <h1> You forgot to Search...</hq>
+      {% endif %}  
+      </center>
+    </div> 
+    {% endblock %}
+
+    <footer>
+      <p>&copy; 2023 Resume Screening Website</p>
+      <p class="contact-info">Contact Info: 9861661645</p>
+      <p class="contact-info">E-mail: passresume@gmail.com </p>
+    </footer>
+    
+    </body>
+  </html>
